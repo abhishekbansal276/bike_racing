@@ -4,20 +4,7 @@
 #include <time.h>
 #include<math.h>
 #include<iostream>
-/*void ecar(int a,int b, int c)
-{int i=0;
-   while(true)
-    {
-        i=i+5;
-        rectangle(355+a,-150+b+i,405+a,-100+b+i);
-    setfillstyle(SOLID_FILL,c);
-        floodfill(356+a,-149+b+i,WHITE);
-        if(i>800)
-            break;
 
-    }
-
-}*/
 using namespace std;
 int dis(int mid1x, int mid1y,int mid2x,int mid2y)
     {
@@ -37,7 +24,7 @@ int main()
     int m1x,m2x,m1y,m2y;
     m1x=m2x=m1y=m2y=0;
     int b = 0, o = 0;
-    int random = 400 + (rand() % 201);
+    int random = 355 + (rand() % 51);
     int treel = 700 + (rand() % 201);
     int treer = 100 + (rand() % 201);
     int treel1 = 700 + (rand() % 201);
@@ -46,7 +33,7 @@ int main()
 
 
     //backgroung
-    initwindow(1000, 1000, "AMAN");
+    initwindow(1000, 1000,"CAR GAME");
     int life = 4;
     while (life > 0)
     {
@@ -66,7 +53,7 @@ int main()
 
         setcolor(WHITE);
         rectangle(350, -1, 650, 1000);
-        setfillstyle(11, 8);
+        setfillstyle(11, LIGHTGRAY);
         floodfill(351, 0, WHITE);
         //line on road
         for (int i = 0; i < 1000; i += 99)
@@ -80,7 +67,7 @@ int main()
         if (track > 100)
             track = 0;
 
-        //ecar(1,2,3);
+
 
         //for life and points
         settextstyle(6, 0, 2);
@@ -101,7 +88,7 @@ int main()
         if (GetAsyncKeyState(VK_RIGHT))
             cx += ms;
 
-        //bike body
+//bike body
         setcolor(YELLOW);
         setfillstyle(1, YELLOW);
         rectangle(450 + cx, 678, 470 + cx, 695);
@@ -121,6 +108,7 @@ int main()
         if (cx <= (-105) || cx >= 175)
         {
             life--;
+
             if(life!=0)
             {
                 delay(1000);
@@ -128,23 +116,73 @@ int main()
                 cx=cx-100;
                 else if(cx<(-105))
                     cx=cx+100;
-            }
-            outtextxy(500, 550, " WAIT ");
-
+                    {setvisualpage(1-1-page);
+            setcolor(YELLOW);
+            settextstyle(10, 0, 4);
+            outtextxy(150,350, "*!!INSURANCE ABHI BAAKI HAI MERE DOST!!*");
             delay(1000);
-        }
+            }
 
+            }
+            else{
+            setvisualpage(1-1-page);
+             setcolor(YELLOW);
+             settextstyle(10, 0, 4);
+             outtextxy(150,350, " *****MUBAARAAK HO AAP HAAR GAYE***** ");
+             delay(10000);
+
+
+            }
+
+        }
+//enemy car
         setcolor(RED);
         setfillstyle(1, RED);
         rectangle(random, 100+b+z, random+100, 200+b+z);
+        floodfill(random + 1, 101 + b + z, RED);
+
+        setcolor(YELLOW);
+        setfillstyle(1, YELLOW);
+        rectangle(random+15,210+b+z,random+35,200+b+z);
+        floodfill(random + 16, 201 + b + z, YELLOW);
+
+        setcolor(YELLOW);
+        setfillstyle(1, YELLOW);
+        rectangle(random+65,210+b+z,random+85,200+b+z);
+        floodfill(random + 76, 201 + b + z, YELLOW);
+
+        setcolor(BROWN);
+        setfillstyle(1,BLACK);
+        rectangle(random-10,105+b+z,random,135+b+z);
+        floodfill(random-10+1,106+b+z,BROWN);
+
+         setcolor(BROWN);
+        setfillstyle(1,BLACK);
+        rectangle(random+100,105+b+z,random+110,135+b+z);
+        floodfill(random+101,106+b+z,BROWN);
+
+        setcolor(BROWN);
+        setfillstyle(1,BLACK);
+        rectangle(random-10,155+b+z,random,185+b+z);
+        floodfill(random-10+1,156+b+z,BROWN);
+
+         setcolor(BROWN);
+        setfillstyle(1,BLACK);
+        rectangle(random+100,155+b+z,random+110,185+b+z);
+        floodfill(random+101,156+b+z,BROWN);
+
+       // setcolor(dark)
+
         m2x=(random+random+100)/2;
         m2y=((2*(b+z))+300)/2;
-        //circle(random, 100 + b + z, 50);
-        floodfill(random + 1, 101 + b + z, RED);
+
+//roadside trees
         setcolor(GREEN);
         setfillstyle(9, GREEN);
+
         circle(treel, -100 + b + z + 150, 50);
         floodfill(treel + 1, -99 + b + z + 150, GREEN);
+
         circle(treer, -100 + b + z, 50);
         floodfill(treer + 1, -99 + b + z, GREEN);
 
@@ -169,7 +207,7 @@ int main()
         if (b >= 950)
         {
             b = 0;
-            random = 400 + (rand() % 201);
+            random = 360 + (rand() % 170);
             treel = 700 + (rand() % 201);
             treer = 100 + (rand() % 201);
             z + 10;
@@ -180,27 +218,32 @@ int main()
         {
             cout<<dis(m1x,m1y,m2x,m2y)<<"\n";
             life--;
-            outtextxy(500, 550, " **WAIT** ");
+
             if(life!=0)//insurance hai kya
             {
+                {
+                        setvisualpage(1-1-page);
+                        settextstyle(10, 0, 4);
+                        outtextxy(150,350, "*!!INSURANCE ABHI BAAKI HAI MERE DOST!!*");
+                        delay(1000);
+                    }
 
                 delay(1000);
                 if(random<(450+cx))
-                cx=cx-100;
+                   cx=cx+100;
                 else if((470+cx)<(random+100))
-                    cx=cx+100;
-            }
-            else{
-              setcolor(6);
-        rectangle(0, 0, 1000, 1000);
-        setfillstyle(1, 6);
-        floodfill(1, 1, 6);
-         settextstyle(6, 0, 2);
-        outtextxy(500,550, " *****MUBAARAAK HO AAP HAAR GAYE***** ");
-        delay(10000);
-
+                    cx=cx-100;
 
             }
+
+            else
+                {
+                    setvisualpage(1-1-page);
+                    setcolor(YELLOW);
+                    settextstyle(10, 0, 4);
+                    outtextxy(150,350, " *****MUBAARAAK HO AAP HAAR GAYE***** ");
+                    delay(10000);
+                }
 
 
 
@@ -218,15 +261,16 @@ int main()
             circle(secondbushx,secondbushy+track,50);
             setfillstyle(1,GREEN);
             floodfill(secondbushx+1,secondbushy+1+track,GREEN);*/
-            setcolor(WHITE);
-            settextstyle(9,VERT_DIR,4);
-            outtextxy(40,250,"* AAS GAMES *");
+            setcolor(YELLOW);
+            settextstyle(10,VERT_DIR,3);
+            outtextxy(30,300,"* AAS GAMES *");
 
         page = 1 - page;
     }
-    cleardevice();
+
 
 
 
     getch();
 }
+
