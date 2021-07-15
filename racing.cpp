@@ -222,9 +222,9 @@ m1x=m2x=m1y=m2y=0;
 
             number=number+5;
             b = 0;
-            //random = 360 + (rand() % 20);
-            random= (rand() %
-           (630 - 360 + 1)) + 360;
+            random = 360 + (rand() % 190);
+            //random= (rand() %
+           //(630 - 360 + 1)) + 360;
             treel = 700 + (rand() % 201);
             treer = 100 + (rand() % 201);
             z + 10;
