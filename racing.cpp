@@ -26,9 +26,11 @@ int track = -300;
     int ecarspeed=0;
     char num_char[1000 + sizeof(char)]={"0"};
     int level=20;
+    int ecolor=4;
 
 int dis(int mid1x, int mid1y,int mid2x,int mid2y)  // distance between enemy and bike
     {
+
         int s=0;
         s=sqrt(pow((mid2x-mid1x),2)+pow((mid2y-mid1y),2));
         return s;
@@ -39,7 +41,7 @@ void enemycar()   //enemy car
 
 
         setcolor(RED);
-        setfillstyle(1, RED);
+        setfillstyle(1, ecolor);
         rectangle(random, 100+b+z+j, random+100, 200+b+z+j);
         floodfill(random + 1, 101 + b + z+j, RED);
 
@@ -94,17 +96,19 @@ int main()
 m1x=m2x=m1y=m2y=0;
 
     //backgroung
-    initwindow(1000, 1000,"CAR GAME");
+    initwindow(1000, 1000,"BIKE GAME");
 
     int life = 4;
+    srand(time(NULL));
 
     while (life > 0)
     {
-        srand(time(NULL));
+
 
         setactivepage(page);
         setvisualpage(1 - page);
         std::to_chars(num_char, num_char + 1000, number);
+        to_string(number);
         b = b + 20;
         o = o + 20;
         delay(100 - z);
@@ -221,11 +225,12 @@ m1x=m2x=m1y=m2y=0;
         if (b >= 950)
         {
 
+
             number=number+5;
             b = 0;
-            //random = 360 + (rand() % 20);
-            random= (rand() %
-           (630 - 360 + 1)) + 360;
+            random = 360 + (rand() % 190);
+            //random= (rand() %
+           //(630 - 360 + 1)) + 360;
             treel = 700 + (rand() % 201);
             treer = 100 + (rand() % 201);
             z + 10;
@@ -235,22 +240,23 @@ m1x=m2x=m1y=m2y=0;
         //accident hua ya nahi bike ka ye dekh raha hu
         if((dis(m1x,m1y,m2x,m2y))<50)
         {
+
             cout<<dis(m1x,m1y,m2x,m2y)<<"\n";
             life--;
 
-            if(life!=0)//insurance hai kya
+            if(life>0)
             {
                 {
                         setvisualpage(1-1-page);
                         settextstyle(10, 0, 4);
-                        outtextxy(150,350, "*!!INSURANCE ABHI BAAKI HAI MERE DOST!!*");
+                        outtextxy(250,350, "!!BE CAREFUL NEXT TIME!!");
                         delay(1000);
                     }
 
                 delay(1000);
-                if(random<(450+cx))
+                if((470+cx)<500)
                    cx=cx+100;
-                else if((470+cx)<(random+100))
+                else if(500<(450+cx))
                     cx=cx-100;
 
             }
@@ -260,8 +266,10 @@ m1x=m2x=m1y=m2y=0;
                     setvisualpage(1-1-page);
                     setcolor(YELLOW);
                     settextstyle(10, 0, 4);
-                    outtextxy(150,350, " *****MUBAARAAK HO AAP HAAR GAYE***** ");
+                    outtextxy(360,350, " !!GAME OVER!! ");
+                    cout<<"\a";
                     delay(10000);
+
                 }
 
 
@@ -281,7 +289,7 @@ m1x=m2x=m1y=m2y=0;
 
             setcolor(YELLOW);
             settextstyle(10, 0, 4);
-            outtextxy(150,350, "*!!INSURANCE ABHI BAAKI HAI MERE DOST!!*");
+            outtextxy(250,350, "!!BE CAREFUL NEXT TIME!!");
             setvisualpage(1-1-page);
 
             }
@@ -291,7 +299,7 @@ m1x=m2x=m1y=m2y=0;
                     setvisualpage(1-1-page);
             setcolor(YELLOW);
             settextstyle(10, 0, 4);
-            outtextxy(150,350, "*!!INSURANCE ABHI BAAKI HAI MERE DOST!!*");
+            outtextxy(250,350, "!!BE CAREFUL NEXT TIME!!");
             delay(1000);
             }
 
@@ -301,8 +309,8 @@ m1x=m2x=m1y=m2y=0;
 
              setcolor(YELLOW);
              settextstyle(10, 0, 4);
-             outtextxy(150,350, " *****MUBAARAAK HO AAP HAAR GAYE***** ");
-
+             outtextxy(360,350, " !!GAME OVER!! ");
+             cout<<"\a";
              delay(10000);
 
 
@@ -311,21 +319,10 @@ m1x=m2x=m1y=m2y=0;
 
         }
 
-        /*int firstbushx=(rand()%150)+50;
-            int firstbushy=(rand()%150)+500;
-            setcolor(GREEN);
-            circle(firstbushx,firstbushy+track,50);
-            setfillstyle(1,GREEN);
-            floodfill(firstbushx+1,firstbushy+1+track,GREEN);
-            int secondbushx=(rand()%150)+50;
-            int secondbushy=(rand()%150)+500;
-            setcolor(GREEN);
-            circle(secondbushx,secondbushy+track,50);
-            setfillstyle(1,GREEN);
-            floodfill(secondbushx+1,secondbushy+1+track,GREEN);*/
+        
             setcolor(YELLOW);
-            settextstyle(10,VERT_DIR,3);
-            outtextxy(30,300,"* AAS GAMES *");
+            settextstyle(10,1,3);
+            outtextxy(30,300,"* AIML PROJECT *");
             if(number>=level)
             {
                 level=level+5;
