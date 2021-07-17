@@ -114,6 +114,7 @@ m1x=m2x=m1y=m2y=0;
         delay(100 - z);
 
         cleardevice();
+
         setcolor(6);
         rectangle(0, 0, 1000, 1000);
         setfillstyle(1,GREEN);
@@ -142,6 +143,8 @@ m1x=m2x=m1y=m2y=0;
         settextstyle(6, 0, 2);
         outtextxy(5, 10, "LIFE : ");
         outtextxy(5, 40, "POINTS : ");
+
+
         for (int i = 100; i <= 160 - ((4 - life) * 20); i += 20)
         {
             setfillstyle(8, WHITE);
@@ -156,6 +159,12 @@ m1x=m2x=m1y=m2y=0;
             cx -= ms;
         if (GetAsyncKeyState(VK_RIGHT))
             cx += ms;
+
+        settextstyle(8,0,1);
+        setcolor(YELLOW);
+        outtextxy(800, 10, "WE CHALLENGE YOU");
+        outtextxy(740, 40, "YOU CAN NOT SCORE MORE ");
+        outtextxy(800,60,"THAN 220 POINTS");
 
 //bike body
         setcolor(YELLOW);
@@ -254,7 +263,7 @@ m1x=m2x=m1y=m2y=0;
                     }
 
                 delay(1000);
-                if((470+cx)<500)
+                if((470+cx)<=500)
                    cx=cx+100;
                 else if(500<(450+cx))
                     cx=cx-100;
