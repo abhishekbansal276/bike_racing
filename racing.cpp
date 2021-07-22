@@ -1,14 +1,15 @@
-
 #include <graphics.h>
-#include <cstdlib>
+#include <stdlib.h>
 #include <string>
 #include <time.h>
 #include<math.h>
 #include<iostream>
 #include <charconv>
 #include<windows.h>
+#include<fstream>
 
 using namespace std;
+
 int track = -300;
     int page = 0;
     int cx = 0, ms = 10;
@@ -27,6 +28,7 @@ int track = -300;
     char num_char[1000 + sizeof(char)]={"0"};
     int level=20;
     int ecolor=4;
+    int flag=0;
 
 int dis(int mid1x, int mid1y,int mid2x,int mid2y)  // distance between enemy and bike
     {
@@ -91,9 +93,46 @@ void enemycar()   //enemy car
 int main()
 
 {
+    HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);
+    fstream high;
+    high.open("highscore.txt",ios::out);
 
+    string name_of_scorer;
+    int high_score;
+    label:
 
-m1x=m2x=m1y=m2y=0;
+        track = -300;
+    page = 0;
+    cx = 0, ms = 10;
+    m1x,m2x,m1y,m2y;
+
+    b = 0, o = 0;
+    random = 355 + (rand() % 51);
+    treel = 700 + (rand() % 201);
+    treer = 100 + (rand() % 201);
+    treel1 = 700 + (rand() % 201);
+    treer1 = 100 + (rand() % 201);
+    z = 0;
+    j=0.1;
+    number = 0;
+    ecarspeed=0;
+char   num_char[1000 + sizeof(char)]={"0"};
+    level=20;
+    ecolor=4;
+    flag=0;
+        string name;
+        cout<<"Enter Your Name:";
+        cin>>name;
+    SetConsoleTextAttribute(h,10);
+     cout<<"Press 1 to Start."<<endl;
+    SetConsoleTextAttribute(h,11);
+     cout<<"Press 2 for Instruction"<<endl;
+    SetConsoleTextAttribute(h,4);
+     cout<<"Press 0 to exit."<<endl;
+    SetConsoleTextAttribute(h,7);
+     cin>>flag;
+    if(flag==1){
+    m1x=m2x=m1y=m2y=0;
 
     //backgroung
     initwindow(1000, 1000,"BIKE GAME");
@@ -250,7 +289,7 @@ m1x=m2x=m1y=m2y=0;
         if((dis(m1x,m1y,m2x,m2y))<50)
         {
 
-            cout<<dis(m1x,m1y,m2x,m2y)<<"\n";
+            //cout<<dis(m1x,m1y,m2x,m2y)<<"\n";
             life--;
 
             if(life>0)
@@ -276,8 +315,23 @@ m1x=m2x=m1y=m2y=0;
                     setcolor(YELLOW);
                     settextstyle(10, 0, 4);
                     outtextxy(360,350, " !!GAME OVER!! ");
+                     outtextxy(450,650,num_char);
                     cout<<"\a";
-                    delay(10000);
+                    delay(100);
+             closegraph();
+               // high>>name_of_scorer;
+               // high>>high_score;
+               high_score=0;
+
+                if(high_score<=number){
+                        high<<" my game  ";
+                    high<<name<<"   ";
+                    high<<number<<"  ";
+                }
+                name_of_scorer=name;
+               high_score=number;
+             goto label;
+
 
                 }
 
@@ -319,16 +373,28 @@ m1x=m2x=m1y=m2y=0;
              setcolor(YELLOW);
              settextstyle(10, 0, 4);
              outtextxy(360,350, " !!GAME OVER!! ");
+              outtextxy(450,650,num_char);
              cout<<"\a";
-             delay(10000);
+             delay(100);
+             closegraph();
+               // high>>name_of_scorer;
+               // high>>high_score;
+high_score=0;
+                if(high_score<=number){
 
+                        high<<"  my game  ";
+                    high<<name<<"  ";
+                    high<<number<<" ";
+                }
+                high_score=number;
+                name_of_scorer=name;
 
-
+             goto label;
             }
 
         }
 
-        
+
             setcolor(YELLOW);
             settextstyle(10,1,3);
             outtextxy(30,300,"* AIML PROJECT *");
@@ -337,18 +403,37 @@ m1x=m2x=m1y=m2y=0;
                 level=level+5;
 
                 ecarspeed=1.5+ecarspeed;
-                cout<<ecarspeed<<"\n";
+               // cout<<ecarspeed<<"\n";
 
 
             }
              j=j+ecarspeed;
-                cout<<j<<"\n";
+               // cout<<j<<"\n";
 
         page = 1 - page;
     }
 
 
 
-
     getch();
+    }
+    else if(flag==2){
+        cout<<endl<<endl;
+        cout<<"\t\t\t\t\tInstructions"<<endl;
+        cout<<endl<<endl;
+        cout<<"This is a bike racing game in which you must avoid obstacles while earning points for each obstacle avoided. You have four lives in total, and at the end of the game, it will tell your score as well as the name and score of the highest scorer."<<endl;
+        cout<<"As the bike advances, it gets more and more points, increasing the speed of the obstacles."<<endl;
+        cout<<endl;
+        cout<<endl;
+        cout<<"-------------------------------------Controls -----------------------------------"<<endl;
+        cout<<"To move bike to left press left arrow key( <- ) ."<<endl;
+        cout<<"To move bike to right press right arrow key( -> ) ."<<endl;
+        cout<<"---------------------------------------------------------------------------------"<<endl;
+        cout<<endl<<endl<<endl;
+        cout<<"Going back to menu in 5 seconds..."<<endl;
+        delay(5000);
+        goto label;
+    }
+
+return 0;
 }
