@@ -4,7 +4,7 @@
 #include <time.h>
 #include<math.h>
 #include<iostream>
-#include <charconv>
+//#include <charconv>
 #include<windows.h>
 #include<fstream>
 
@@ -89,19 +89,51 @@ void enemycar()   //enemy car
         m2y=((2*(b+z+j))+300)/2;
 }
 
+//Function for Printing Colored Message
+
+/*void printMsg()
+{
+    // auto detection
+    int gdriver = DETECT,gmode,i;
+
+    // initialize graphics mode
+    initgraph(&gdriver,&gmode,"C:\\Turboc3\\BGI");
+
+    for (i=3; i<4; i++)
+    {
+        // setcolor of cursor
+        setcolor(i);
+
+        // set text style as
+        // settextstyle(font, orientation, size)
+        settextstyle(i,0,i);
+
+        // print text at coordinate x,y;
+        outtextxy(100,20*i,"Hello");
+
+        delay(500);
+    }
+
+    delay(2000);
+}*/
 
 int main()
 
 {
     HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);
     fstream high;
-    high.open("highscore.txt",ios::out);
+    //high.open("highscore.txt", ios::out);
+    //fstream namer;
+    /*high.open("highscore.txt",ios::app);
+    high<<"Bike game";*/
 
     string name_of_scorer;
     int high_score;
+
     label:
 
-        track = -300;
+    track = -300;
+
     page = 0;
     cx = 0, ms = 10;
     m1x,m2x,m1y,m2y;
@@ -116,25 +148,35 @@ int main()
     j=0.1;
     number = 0;
     ecarspeed=0;
-char   num_char[1000 + sizeof(char)]={"0"};
+
+    char   num_char[1000 + sizeof(char)]={"0"};
     level=20;
     ecolor=4;
     flag=0;
+
+
         string name;
-        cout<<"Enter Your Name:";
+        cout<<"Enter Your Name: ";
         cin>>name;
+
+        //printMsg();
+
     SetConsoleTextAttribute(h,10);
      cout<<"Press 1 to Start."<<endl;
+
     SetConsoleTextAttribute(h,11);
      cout<<"Press 2 for Instruction"<<endl;
+
     SetConsoleTextAttribute(h,4);
      cout<<"Press 0 to exit."<<endl;
+
     SetConsoleTextAttribute(h,7);
      cin>>flag;
+
     if(flag==1){
     m1x=m2x=m1y=m2y=0;
 
-    //backgroung
+    //background
     initwindow(1000, 1000,"BIKE GAME");
 
     int life = 4;
@@ -146,7 +188,7 @@ char   num_char[1000 + sizeof(char)]={"0"};
 
         setactivepage(page);
         setvisualpage(1 - page);
-        std::to_chars(num_char, num_char + 1000, number);
+//        std::to_chars(num_char, num_char + 1000, number);
         to_string(number);
         b = b + 20;
         o = o + 20;
@@ -318,18 +360,32 @@ char   num_char[1000 + sizeof(char)]={"0"};
                      outtextxy(450,650,num_char);
                     cout<<"\a";
                     delay(100);
-             closegraph();
-               // high>>name_of_scorer;
-               // high>>high_score;
-               high_score=0;
+             //closegraph();
 
-                if(high_score<=number){
-                        high<<" my game  ";
-                    high<<name<<"   ";
-                    high<<number<<"  ";
+             high.open("highscore.txt", ios::out | ios::in);
+               //high>>name_of_scorer;
+               int temp;
+               high>>temp;
+//cout<<temp;
+               //high.open("highscore.txt", ios::out);
+               //while (!high.eof())
+
+               //name_of_scorer=name;
+               //high_score=number;
+               high.close();
+                if(temp<=number){
+                        //high<<" my game  ";
+                    //high<<name<<"   ";
+                    high.open("highscore.txt",ios::out | ios::trunc);
+                    high<<number;
+                    high.close();
                 }
-                name_of_scorer=name;
-               high_score=number;
+
+                /*namer.open("name.txt", ios::out | ios::trunc);
+                namer<<name;
+                namer.close();*/
+
+                closegraph();
              goto label;
 
 
@@ -376,19 +432,32 @@ char   num_char[1000 + sizeof(char)]={"0"};
               outtextxy(450,650,num_char);
              cout<<"\a";
              delay(100);
-             closegraph();
-               // high>>name_of_scorer;
-               // high>>high_score;
-high_score=0;
-                if(high_score<=number){
+             //closegraph();
 
-                        high<<"  my game  ";
-                    high<<name<<"  ";
-                    high<<number<<" ";
+               high.open("highscore.txt", ios::out | ios::in);
+               //high>>name_of_scorer;
+               int temp;
+               high>>temp;
+            //cout<<temp;
+               //high.open("highscore.txt", ios::out);
+               //while (!high.eof())
+
+               //name_of_scorer=name;
+               //high_score=number;
+               high.close();
+                if(temp<=number){
+                        //high<<" my game  ";
+                    //high<<name<<"   ";
+                    high.open("highscore.txt",ios::out | ios::trunc);
+                    high<<number;
+                    high.close();
                 }
-                high_score=number;
-                name_of_scorer=name;
 
+                /*namer.open("name.txt", ios::out | ios::trunc);
+                namer<<name;
+                namer.close();*/
+
+                closegraph();
              goto label;
             }
 
