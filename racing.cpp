@@ -1,13 +1,15 @@
 #include <graphics.h>
-#include <cstdlib>
+#include <stdlib.h>
 #include <string>
 #include <time.h>
 #include<math.h>
 #include<iostream>
 //#include <charconv>
 #include<windows.h>
+#include<fstream>
 
 using namespace std;
+
 int track = -300;
     int page = 0;
     int cx = 0, ms = 10;
@@ -26,6 +28,7 @@ int track = -300;
     char num_char[1000 + sizeof(char)]={"0"};
     int level=20;
     int ecolor=4;
+    int flag=0;
 
 int dis(int mid1x, int mid1y,int mid2x,int mid2y)  // distance between enemy and bike
     {
@@ -86,15 +89,94 @@ void enemycar()   //enemy car
         m2y=((2*(b+z+j))+300)/2;
 }
 
+//Function for Printing Colored Message
+
+/*void printMsg()
+{
+    // auto detection
+    int gdriver = DETECT,gmode,i;
+
+    // initialize graphics mode
+    initgraph(&gdriver,&gmode,"C:\\Turboc3\\BGI");
+
+    for (i=3; i<4; i++)
+    {
+        // setcolor of cursor
+        setcolor(i);
+
+        // set text style as
+        // settextstyle(font, orientation, size)
+        settextstyle(i,0,i);
+
+        // print text at coordinate x,y;
+        outtextxy(100,20*i,"Hello");
+
+        delay(500);
+    }
+
+    delay(2000);
+}*/
 
 int main()
 
 {
+    HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);
+    fstream high;
+    //high.open("highscore.txt", ios::out);
+    //fstream namer;
+    /*high.open("highscore.txt",ios::app);
+    high<<"Bike game";*/
+
+    string name_of_scorer;
+    int high_score;
+
+    label:
+
+    track = -300;
+
+    page = 0;
+    cx = 0, ms = 10;
+    m1x,m2x,m1y,m2y;
+
+    b = 0, o = 0;
+    random = 355 + (rand() % 51);
+    treel = 700 + (rand() % 201);
+    treer = 100 + (rand() % 201);
+    treel1 = 700 + (rand() % 201);
+    treer1 = 100 + (rand() % 201);
+    z = 0;
+    j=0.1;
+    number = 0;
+    ecarspeed=0;
+
+    char   num_char[1000 + sizeof(char)]={"0"};
+    level=20;
+    ecolor=4;
+    flag=0;
 
 
-m1x=m2x=m1y=m2y=0;
+        string name;
+        cout<<"Enter Your Name: ";
+        cin>>name;
 
-    //backgroung
+        //printMsg();
+
+    SetConsoleTextAttribute(h,10);
+     cout<<"Press 1 to Start."<<endl;
+
+    SetConsoleTextAttribute(h,11);
+     cout<<"Press 2 for Instruction"<<endl;
+
+    SetConsoleTextAttribute(h,4);
+     cout<<"Press 0 to exit."<<endl;
+
+    SetConsoleTextAttribute(h,7);
+     cin>>flag;
+
+    if(flag==1){
+    m1x=m2x=m1y=m2y=0;
+
+    //background
     initwindow(1000, 1000,"BIKE GAME");
 
     int life = 4;
@@ -106,7 +188,7 @@ m1x=m2x=m1y=m2y=0;
 
         setactivepage(page);
         setvisualpage(1 - page);
-        to_chars(num_char, num_char + 1000, number);
+//        std::to_chars(num_char, num_char + 1000, number);
         to_string(number);
         b = b + 20;
         o = o + 20;
@@ -249,7 +331,7 @@ m1x=m2x=m1y=m2y=0;
         if((dis(m1x,m1y,m2x,m2y))<50)
         {
 
-            cout<<dis(m1x,m1y,m2x,m2y)<<"\n";
+            //cout<<dis(m1x,m1y,m2x,m2y)<<"\n";
             life--;
 
             if(life>0)
@@ -275,8 +357,37 @@ m1x=m2x=m1y=m2y=0;
                     setcolor(YELLOW);
                     settextstyle(10, 0, 4);
                     outtextxy(360,350, " !!GAME OVER!! ");
+                     outtextxy(450,650,num_char);
                     cout<<"\a";
-                    delay(10000);
+                    delay(100);
+             //closegraph();
+
+             high.open("highscore.txt", ios::out | ios::in);
+               //high>>name_of_scorer;
+               int temp;
+               high>>temp;
+//cout<<temp;
+               //high.open("highscore.txt", ios::out);
+               //while (!high.eof())
+
+               //name_of_scorer=name;
+               //high_score=number;
+               high.close();
+                if(temp<=number){
+                        //high<<" my game  ";
+                    //high<<name<<"   ";
+                    high.open("highscore.txt",ios::out | ios::trunc);
+                    high<<number;
+                    high.close();
+                }
+
+                /*namer.open("name.txt", ios::out | ios::trunc);
+                namer<<name;
+                namer.close();*/
+
+                closegraph();
+             goto label;
+
 
                 }
 
@@ -318,11 +429,36 @@ m1x=m2x=m1y=m2y=0;
              setcolor(YELLOW);
              settextstyle(10, 0, 4);
              outtextxy(360,350, " !!GAME OVER!! ");
+              outtextxy(450,650,num_char);
              cout<<"\a";
-             delay(10000);
+             delay(100);
+             //closegraph();
 
+               high.open("highscore.txt", ios::out | ios::in);
+               //high>>name_of_scorer;
+               int temp;
+               high>>temp;
+            //cout<<temp;
+               //high.open("highscore.txt", ios::out);
+               //while (!high.eof())
 
+               //name_of_scorer=name;
+               //high_score=number;
+               high.close();
+                if(temp<=number){
+                        //high<<" my game  ";
+                    //high<<name<<"   ";
+                    high.open("highscore.txt",ios::out | ios::trunc);
+                    high<<number;
+                    high.close();
+                }
 
+                /*namer.open("name.txt", ios::out | ios::trunc);
+                namer<<name;
+                namer.close();*/
+
+                closegraph();
+             goto label;
             }
 
         }
@@ -336,18 +472,37 @@ m1x=m2x=m1y=m2y=0;
                 level=level+5;
 
                 ecarspeed=1.5+ecarspeed;
-                cout<<ecarspeed<<"\n";
+               // cout<<ecarspeed<<"\n";
 
 
             }
              j=j+ecarspeed;
-                cout<<j<<"\n";
+               // cout<<j<<"\n";
 
         page = 1 - page;
     }
 
 
 
-
     getch();
+    }
+    else if(flag==2){
+        cout<<endl<<endl;
+        cout<<"\t\t\t\t\tInstructions"<<endl;
+        cout<<endl<<endl;
+        cout<<"This is a bike racing game in which you must avoid obstacles while earning points for each obstacle avoided. You have four lives in total, and at the end of the game, it will tell your score as well as the name and score of the highest scorer."<<endl;
+        cout<<"As the bike advances, it gets more and more points, increasing the speed of the obstacles."<<endl;
+        cout<<endl;
+        cout<<endl;
+        cout<<"-------------------------------------Controls -----------------------------------"<<endl;
+        cout<<"To move bike to left press left arrow key( <- ) ."<<endl;
+        cout<<"To move bike to right press right arrow key( -> ) ."<<endl;
+        cout<<"---------------------------------------------------------------------------------"<<endl;
+        cout<<endl<<endl<<endl;
+        cout<<"Going back to menu in 5 seconds..."<<endl;
+        delay(5000);
+        goto label;
+    }
+
+return 0;
 }
