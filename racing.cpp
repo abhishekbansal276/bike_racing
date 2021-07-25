@@ -436,6 +436,7 @@ label:
             setcolor(YELLOW);
             settextstyle(10, 1, 3);
             outtextxy(30, 300, "* AIML PROJECT *");
+            readimagefile("logo.jpeg", 820, 100, 920, 200);
             if (number >= level)
             {
                 level = level + 5;
